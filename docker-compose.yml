@@ -25,17 +25,4 @@ services:
      - 27017:27017
     command: mongod --replSet rs0 --shardsvr --port 27017 --nojournal --oplogSize 16 --noprealloc --smallfiles
     restart: always
-  
-  # This configures the MongoDB replicaset  
-  chatbot-mongosetup:
-    container_name: "chatbot-mongosetup"
-    image: mongo:3.4.10
-    depends_on:
-      - chatbot-mongodb
-    links:
-      - chatbot-mongodb:chatbot-mongodb
-    volumes:
-      - ./scripts:/scripts
-    environment:
-      - MONGODB=chatbot-mongodb
-    entrypoint: [ "/bin/bash", "/scripts/mongosetup.sh" ]
+ 
