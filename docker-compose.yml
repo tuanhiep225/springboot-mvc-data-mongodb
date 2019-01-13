@@ -22,8 +22,8 @@ services:
     container_name: "chatbot-mongodb"
     image: mongo:3.4.10
     ports:
-     - 27015:27017
-    command: mongod --replSet rs0 --shardsvr --port 27015 --nojournal --oplogSize 16 --noprealloc --smallfiles
+     - 27017:27017
+    command: mongod --replSet rs0 --shardsvr --port 27017 --nojournal --oplogSize 16 --noprealloc --smallfiles
     restart: always
   
   # This configures the MongoDB replicaset  
