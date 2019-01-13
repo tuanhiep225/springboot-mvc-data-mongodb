@@ -17,7 +17,11 @@
 	</parent>
 
 	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
+		<logback.logstash.version>4.11</logback.logstash.version>
+		<docker.image.prefix>sodo</docker.image.prefix>
 	</properties>
 
 	<dependencies>
