@@ -1,10 +1,10 @@
 Manifest-Version: 1.0
-Implementation-Title: spring-mongodb-web-chatbot
-Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Title: sodo-xmarketing
+Implementation-Version: 1.0.0
 Built-By: tuanhiep225
-Implementation-Vendor-Id: springboot-mvc-data-mongodb-master
+Implementation-Vendor-Id: com.sodo.chatbot
 Build-Jdk: 1.8.0_162
 Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
- ot-starter-parent/springboot-mvc-data-mongodb-master
+ ot-starter-parent/sodo-chatbot
 Created-By: Maven Integration for Eclipse
 
