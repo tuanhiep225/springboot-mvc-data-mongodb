@@ -7,8 +7,8 @@
 	<version>1.0.0</version>
 	<packaging>jar</packaging>
 
-	<name>sodo-xmarketing</name>
-	<description>X Marketing</description>
+	<name>sodo-chatbot</name>
+	<description>X Chatbot</description>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>

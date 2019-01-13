@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Implementation-Title: sodo-xmarketing
+Implementation-Title: sodo-chatbot
 Implementation-Version: 1.0.0
 Built-By: tuanhiep225
 Implementation-Vendor-Id: com.sodo.chatbot
