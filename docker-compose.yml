@@ -23,6 +23,6 @@ services:
     image: mongo:3.4.10
     ports:
      - 27017:27017
-    command: mongod --replSet rs0 --shardsvr --port 27017 --nojournal --oplogSize 16 --noprealloc --smallfiles
+    command: mongod --shardsvr --port 27017 --wiredTigerCacheSizeGB=3 --nojournal --oplogSize 16 --noprealloc --smallfiles
     restart: always
  
