@@ -9,7 +9,7 @@ services:
     links:
       - chatbot-mongodb
     ports:
-      - 8095:8080
+      - 8080:8080
     volumes:
       - .:/opt/WORK_SPACE/export/
       - /opt/logs/:/opt/WORK_SPACE/chatbot/data/log/
