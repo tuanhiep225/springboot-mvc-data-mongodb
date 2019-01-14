@@ -93,7 +93,7 @@ public class ChatBotController {
 		InformationRequestModel userGioithieu = service.getInformationRequestModelByLinkgioithieu(urlLink);
 
 		if (userGioithieu != null && urlLink.equals(userGioithieu.getLinkgioithieu())) {
-			BroadCastChatbot.sendToBlock("CongDiem", userGioithieu);
+			BroadCastChatbot.sendToBlock("CongDiem", userGioithieu, data.getHoten());
 		}
 		return ResponseChatfuel.builder().set_attributes(attributes).build();
 	}

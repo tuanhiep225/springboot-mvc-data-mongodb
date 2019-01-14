@@ -25,10 +25,10 @@ public class BroadCastChatbot {
 	private static final Log LOGGER = LogFactory.getLog(BroadCastChatbot.class);
 	private static Client client;
 
-	public static void sendToBlock(String blockName, InformationRequestModel model) throws Exception {
+	public static void sendToBlock(String blockName, InformationRequestModel model, String nguoiduocgioithieu) throws Exception {
 		client = ClientHelperUtils.createClient();
 		String url = "https://api.chatfuel.com/bots/" + model.getBot_id() + "/users/" + model.getMessid()
-				+ "/send?chatfuel_token=" + model.getBot_token() + "&chatfuel_block_name=" + blockName;
+				+ "/send?chatfuel_token=" + model.getBot_token() + "&chatfuel_block_name=" + blockName+"&nguoigioithieu="+URLEncoder.encode(nguoiduocgioithieu);
 		WebTarget target = client.target(url);
 		Response response = target.request().post(Entity.json("{}"));
 	}
