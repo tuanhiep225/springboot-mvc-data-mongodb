@@ -62,6 +62,7 @@ public class ChatBotController {
 	private static final Log LOGGER = LogFactory.getLog(ChatBotController.class);
 
 	@GetMapping("/gender")
+	@ResponseBody
 	public ResponseChatfuel getGender(@RequestParam(value = "gender", required = false) String gender) {
 		Map<String, String> resutl_gender = new HashMap<String, String>();
 		if ("male".equals(gender)) {
