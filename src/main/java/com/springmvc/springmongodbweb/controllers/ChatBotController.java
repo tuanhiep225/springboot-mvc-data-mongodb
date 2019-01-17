@@ -71,6 +71,9 @@ public class ChatBotController {
 		} else if ("female".equals(gender)) {
 			resutl_gender.put("gioitinh", "chị");
 			resutl_gender.put("GioiTinh", "Chị");
+		} else {
+			resutl_gender.put("gioitinh", "bạn");
+			resutl_gender.put("GioiTinh", "Bạn");
 		}
 		return ResponseChatfuel.builder().set_attributes(resutl_gender).build();
 	}
