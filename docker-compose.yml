@@ -32,7 +32,7 @@ services:
     image: mysql:5.7
     restart: always
     ports:
-     - 36016:36016
+     - 3306:3306
     container_name: "chatbot-mysql"
     environment:
        MYSQL_ROOT_PASSWORD: root
