@@ -6,7 +6,8 @@ import java.util.Map;
 
 public class ConvertPhone {
 	private static Map<String, String> phones;
-	public static void init() {
+	
+	static {
 		phones = new HashMap<String,String>();
 		phones.put( "070","84120");
 		phones.put( "079","84121");
@@ -34,6 +35,7 @@ public class ConvertPhone {
 		
 		phones.put("059","84199");
 	}
+	
 	public static String convert(String phone) {
 		if(phone != null) {
 			String dausomoi = phone.substring(0, 3);
