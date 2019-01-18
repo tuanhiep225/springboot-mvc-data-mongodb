@@ -8,7 +8,7 @@ services:
     image: sodo/sodo-chatbot
     links:
       - chatbot-mongodb
-      - chatbot-mysql
+      - mysql-chatbot
     ports:
       - 8080:8080
     volumes:
@@ -28,12 +28,12 @@ services:
     restart: always
     
    #Mysql
-  chatbot-mysql:
+  mysql-chatbot:
     image: mysql:5.7
     restart: always
     ports:
      - 3306:3306
-    container_name: "chatbot-mysql"
+    container_name: "mysql-chatbot"
     environment:
        MYSQL_ROOT_PASSWORD: root
        MYSQL_DATABASE: bigdata
