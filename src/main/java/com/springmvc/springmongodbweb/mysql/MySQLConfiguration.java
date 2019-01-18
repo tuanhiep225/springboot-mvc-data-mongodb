@@ -54,6 +54,7 @@ public class MySQLConfiguration {
 		dataSource.setDriverClassName(env.getProperty("spring.mysql.jdbc.driverClassName"));
 		dataSource.setUrl(env.getProperty("spring.mysql.jdbc.url"));
 		dataSource.setUsername(env.getProperty("spring.mysql.user"));
+		dataSource.setPassword(env.getProperty("spring.mysql.pass"));
 
 		return dataSource;
 	}
