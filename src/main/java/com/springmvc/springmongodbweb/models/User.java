@@ -3,10 +3,8 @@
  */
 package com.springmvc.springmongodbweb.models;
 
-import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
-
+import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.springmvc.springmongodbweb.models.entity.BaseEntity;
 
@@ -51,6 +49,10 @@ public class User extends BaseEntity<String> {
 	private String goToBlock;
 
 	private String fb_iframe_origin;
+	
+	private Boolean valid;
+	
+	private String gioitinh;
 
 	@Override
 	public String getId() {

@@ -33,6 +33,7 @@ import com.springmvc.springmongodbweb.repositories.UserRepository;
 import com.springmvc.springmongodbweb.repositories.WardRepository;
 import com.springmvc.springmongodbweb.service.InformationRequestModelService;
 import com.springmvc.springmongodbweb.utils.BroadCastChatbot;
+import com.springmvc.springmongodbweb.utils.ConvertPhone;
 
 /**
  * @author tuanhiep225
@@ -109,7 +110,7 @@ public class ChatBotController {
 	@RequestMapping("/create")
 	public String create(@RequestParam String title, @RequestParam String messenger_user_id,
 			@RequestParam String bot_id, @RequestParam String bot_token, @RequestParam String bot_link,
-			@RequestParam String goToBlock, @RequestParam String fb_iframe_origin, Model model) {
+			@RequestParam String goToBlock, @RequestParam String fb_iframe_origin,@RequestParam String gioitinh, Model model) {
 		model.addAttribute("title", title);
 		model.addAttribute("messenger_user_id", messenger_user_id);
 		model.addAttribute("bot_id", bot_id);
@@ -117,6 +118,7 @@ public class ChatBotController {
 		model.addAttribute("bot_link", bot_link);
 		model.addAttribute("goToBlock", goToBlock);
 		model.addAttribute("fb_iframe_origin", fb_iframe_origin);
+		model.addAttribute("gioitinh", gioitinh);
 		return "create";
 	}
 
@@ -125,12 +127,17 @@ public class ChatBotController {
 	public User save(@RequestParam String hoten, @RequestParam String dienthoai, @RequestParam String tinh_tp,
 			@RequestParam String quan_huyen, @RequestParam String phuong_xa, @RequestParam String diachi,
 			@RequestParam String messenger_user_id, @RequestParam String bot_id, @RequestParam String bot_token,
-			@RequestParam String bot_link, @RequestParam String goToBlock, @RequestParam String fb_iframe_origin) throws Exception {
+			@RequestParam String bot_link, @RequestParam String goToBlock, @RequestParam String fb_iframe_origin, @RequestParam String gioitinh) throws Exception {
 
 		User user = User.builder().hoten(hoten).sodienthoai(dienthoai).tinh_tp(provinceRepo.getByProvinceid(tinh_tp)).quan_huyen(districtRepository.getByDistrictid(quan_huyen))
 				.phuong_xa(wardRepository.getByWardid(phuong_xa)).diachi(diachi).messenger_user_id(messenger_user_id).bot_id(bot_id)
 				.bot_token(bot_token).bot_link(bot_link).goToBlock(goToBlock).fb_iframe_origin(fb_iframe_origin)
+				.gioitinh(gioitinh)
 				.build();
+		String phone = ConvertPhone.convert(dienthoai);
+		if(phone != null && !phone.isEmpty()) {
+			
+		}
 		User res = userRepo.add(user);
 		
 		BroadCastChatbot.sendToBlock(user.getGoToBlock(), res);
