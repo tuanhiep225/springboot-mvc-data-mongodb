@@ -40,3 +40,4 @@ services:
        MYSQL_USER: root
        MYSQL_PASSWORD: root
        MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    restart: always
