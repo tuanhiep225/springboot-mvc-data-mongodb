@@ -22,6 +22,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Document(collection = "user")
+@CompoundIndex(def = "{'messenger_user_id':1, 'bot_id':1}", name = "compound_index", unique = true)
 public class User extends BaseEntity<String> {
 
 	private String id;
