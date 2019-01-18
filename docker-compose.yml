@@ -39,4 +39,4 @@ services:
        MYSQL_DATABASE: bigdata
        MYSQL_USER: root
        MYSQL_PASSWORD: root
-       MYSQL_ALLOW_EMPTY_PASSWORD: yes
+       MYSQL_ALLOW_EMPTY_PASSWORD: true
