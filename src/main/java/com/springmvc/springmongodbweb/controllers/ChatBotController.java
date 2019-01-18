@@ -25,6 +25,8 @@ import com.springmvc.springmongodbweb.models.Province;
 import com.springmvc.springmongodbweb.models.ResponseChatfuel;
 import com.springmvc.springmongodbweb.models.User;
 import com.springmvc.springmongodbweb.models.Ward;
+import com.springmvc.springmongodbweb.mysql.models.PhoneMail;
+import com.springmvc.springmongodbweb.mysql.repositories.PhoneMailRepository;
 import com.springmvc.springmongodbweb.repositories.DistrictRepository;
 import com.springmvc.springmongodbweb.repositories.ProvinceRepository;
 import com.springmvc.springmongodbweb.repositories.UserRepository;
@@ -53,6 +55,9 @@ public class ChatBotController {
 
 	@Autowired
 	private UserRepository userRepo;
+	
+	@Autowired
+	private PhoneMailRepository phonemail;
 
 	// private Client client;
 	//
@@ -147,6 +152,7 @@ public class ChatBotController {
 	@GetMapping("/wards")
 	@ResponseBody
 	public Collection<Ward> wards(@RequestParam String districtid) {
+		PhoneMail rs = phonemail.getByPhone("841200000114");
 		return wardRepository.getByDistrictid(districtid);
 	}
 }

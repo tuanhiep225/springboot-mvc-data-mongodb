@@ -8,6 +8,7 @@ services:
     image: sodo/sodo-chatbot
     links:
       - chatbot-mongodb
+      - mysql
     ports:
       - 8080:8080
     volumes:
@@ -25,4 +26,15 @@ services:
      - 27017:27017
     command: mongod --shardsvr --port 27017 --wiredTigerCacheSizeGB=3 --nojournal --oplogSize 16 --noprealloc --smallfiles
     restart: always
- 
+    
+   #Mysql
+  mysql:
+    image: mysql:5.7
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    environment:
+       MYSQL_ROOT_PASSWORD: root
+       MYSQL_DATABASE: bigdata
+       MYSQL_USER: root
+       MYSQL_PASSWORD: root
