@@ -25,7 +25,6 @@ import org.springframework.transaction.PlatformTransactionManager;
  *
  */
 @Configuration
-@PropertySource("classpath:persistence-multiple-db.properties")
 @EnableJpaRepositories(basePackages = "com.springmvc.springmongodbweb.mysql", entityManagerFactoryRef = "mysqlEntityManager", transactionManagerRef = "mysqlTransactionManager")
 public class MySQLConfiguration {
 	@Autowired
