@@ -152,7 +152,18 @@ public class ChatBotController {
 	@GetMapping("/wards")
 	@ResponseBody
 	public Collection<Ward> wards(@RequestParam String districtid) {
-		PhoneMail rs = phonemail.getByPhone("841200000114");
 		return wardRepository.getByDistrictid(districtid);
+	}
+	
+	@GetMapping("/check-phone")
+	@ResponseBody
+	public PhoneMail checkPhone(@RequestParam String phone) {
+		return phonemail.getByPhone(phone);
+	}
+	
+	@GetMapping("/check-uid")
+	@ResponseBody
+	public PhoneMail checkUid(@RequestParam String uid) {
+		return phonemail.getByUid(uid);
 	}
 }
