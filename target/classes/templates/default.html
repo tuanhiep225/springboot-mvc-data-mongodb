@@ -19,6 +19,19 @@ body {
 }
 </style>
 <script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
+<!-- messenger extensions sdk -->
+<script type="text/javascript">
+	(function(d, s, id) {
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) {
+			return;
+		}
+		js = d.createElement(s);
+		js.id = id;
+		js.src = "//connect.facebook.com/en_US/messenger.Extensions.js";
+		fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'Messenger'));
+</script>
 </head>
 <body>
 
@@ -28,18 +41,5 @@ body {
 	<!-- /.container -->
 
 	<script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<!-- messenger extensions sdk -->
-	<script type="text/javascript">
-		(function(d, s, id) {
-			var js, fjs = d.getElementsByTagName(s)[0];
-			if (d.getElementById(id)) {
-				return;
-			}
-			js = d.createElement(s);
-			js.id = id;
-			js.src = "//connect.facebook.com/en_US/messenger.Extensions.js";
-			fjs.parentNode.insertBefore(js, fjs);
-		}(document, 'script', 'Messenger'));
-	</script>
 </body>
 </html>
