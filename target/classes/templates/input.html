@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Input Component</title>
+<link
+	href="https://fonts.googleapis.com/css?family=Open+Sans:200,300,400,400i,500,600,700"
+	rel="stylesheet">
+<link rel="stylesheet" href="/webview/webvUI.min.css">
+<link rel="stylesheet" href="/webview/webvUI-menu.min.css">
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="/webview/webvUI.min.js"></script>
+<script type="text/javascript" src="/webview/webvUI-menu.js"></script>
+<script type="text/javascript" src="/webview/webvUI-slider.js"></script>
+<script type="text/javascript">
+	(function(d, s, id) {
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) {
+			return;
+		}
+		js = d.createElement(s);
+		js.id = id;
+		js.src = "https://connect.facebook.com/en_US/messenger.Extensions.js";
+		fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'Messenger'));
+</script>
+</head>
+
+<body style="background-color: #fafafa;">
+	<div class="main-container">
+		<div class="page input js_show">
+			<div class="page__hd">
+				<h1 class="page__title">Thông tin nhận quà tặng</h1>
+			</div>
+			<div class="page__bd">
+				<form name="frm" method="post">
+				<input type="hidden" name="messenger_user_id" th:value="${messenger_user_id}">
+				<input type="hidden" name="goToBlock" th:value="${goToBlock}">
+				<input type="hidden" name="bot_id" th:value="${bot_id}">
+				<input type="hidden" name="bot_link" th:value="${bot_link}">
+				<input type="hidden" name="bot_token" th:value="${bot_token}">
+				<input type="hidden" name="fb_iframe_origin" th:value="${fb_iframe_origin}">
+				<input type="hidden" name="gioitinh" th:value="${gioitinh}">
+				<input type="hidden" name="mess_name" th:value="${mess_name}">
+				<div class="webvUI-cells">
+				     <div class="webvUI-cell">
+                        <div class="webvUI-cell__hd">
+                            <label class="webvUI-label">Họ tên</label>
+                        </div>
+                        <div class="webvUI-cell__bd">
+                            <input name="hoten" class="webvUI-input" type="text" placeholder="Họ tên">
+                        </div>
+                    </div>
+					<div class="webvUI-cell">
+					    <div class="webvUI-cell__hd">
+                            <label class="webvUI-label">SĐT</label>
+                        </div>
+                        <div class="webvUI-cell__bd">
+						<input  name="dienthoai" class="webvUI-input" type="number" pattern="[0-9]*"
+							placeholder="Số điện thoại">
+                        </div>
+					</div>
+					<div
+						class="webvUI-cell webvUI-cell_select webvUI-cell_select-after">
+						<div class="webvUI-cell__hd">
+							<label for="" class="webvUI-label">Tỉnh/TP</label>
+						</div>
+						<div class="webvUI-cell__bd">
+							<select id="country-select" name="tinh_tp" class="webvUI-select">
+							</select>
+						</div>
+					</div>
+					<div
+						class="webvUI-cell webvUI-cell_select webvUI-cell_select-after">
+						<div class="webvUI-cell__hd">
+							<label for="" class="webvUI-label">Quận/Huyện</label>
+						</div>
+						<div class="webvUI-cell__bd">
+							<select id="state-select" class="webvUI-select"  name="quan_huyen">
+							</select>
+						</div>
+					</div>
+					<div
+						class="webvUI-cell webvUI-cell_select webvUI-cell_select-after">
+						<div class="webvUI-cell__hd">
+							<label for="" class="webvUI-label">Xã/Phường</label>
+						</div>
+						<div class="webvUI-cell__bd">
+							<select id="city-select" class="webvUI-select"name="phuong_xa">
+							</select>
+						</div>
+					</div>
+					<div class="webvUI-cell">
+                        <div class="webvUI-cell__hd">
+                            <label class="webvUI-label">Địa chỉ</label>
+                        </div>
+                        <div class="webvUI-cell__bd">
+                            <input  name="diachi" class="webvUI-input" type="text" placeholder="Địa chỉ">
+                        </div>
+                    </div>
+				</div>
+				<div class="webvUI-bottombtn">
+					<a href="javascript:;" class="webvUI-btn webvUI-btn_primary"
+						onclick="closeWebview()">Proceed to Checkout</a>
+				</div>
+				</form>
+						<script type="text/javascript">
+
+			$.ajax({
+				url: "provinces",
+				success: function (data, status) {
+					var select = document.getElementById("country-select");
+					if (data) {
+						for (var i = 0; i < data.length; i++) {
+							var option = document.createElement("option");
+							option.text = data[i].name;
+							option.value = data[i].provinceid;
+							select.appendChild(option);
+						}
+					}
+				}
+			});
+
+			function getStatesSelectList() {
+				var country_select = document.getElementById("country-select");
+				var city_select = document.getElementById("city-select");
+
+				var country_id = country_select.options[country_select.selectedIndex].value;
+				console.log('CountryId : ' + country_id);
+
+				$.ajax({
+					url: "districts?provinceid=" + country_id,
+					success: function (data, status) {
+						var state_select = document.getElementById("state-select");
+						if (data) {
+							for (var i = 0; i < data.length; i++) {
+								var option = document.createElement("option");
+								option.text = data[i].name;
+								option.value = data[i].districtid;
+								state_select.appendChild(option);
+							}
+						}
+					}
+				});
+			}
+
+			function getCitySelectList() {
+				var state_select = document.getElementById("state-select");
+
+				var state_id = state_select.options[state_select.selectedIndex].value;
+				console.log('StateId : ' + state_id);
+
+				$.ajax({
+					url: "wards?districtid=" + state_id,
+					success: function (data, status) {
+						var city_select = document.getElementById("city-select");
+						if (data) {
+							for (var i = 0; i < data.length; i++) {
+								var option = document.createElement("option");
+								option.text = data[i].name;
+								option.value = data[i].wardid;
+								city_select.appendChild(option);
+							}
+						}
+					}
+				});
+			}
+
+			var country_select = document.getElementById("country-select");
+			country_select.addEventListener("change", getStatesSelectList);
+
+			var state_select = document.getElementById("state-select");
+			state_select.addEventListener("change", getCitySelectList);
+			
+			function closeWebview() {
+				if (document.forms['frm'].hoten.value === "") {
+					alert("Bạn chưa điền họ tên");
+				}
+				else if (document.forms['frm'].dienthoai.value.length < 10 || document.forms['frm'].dienthoai.value.length > 13) {
+					alert("Bạn chưa điền hoặc sai số điện thoại");
+				}
+				else if (document.forms['frm'].diachi.value === "") {
+					alert("Bạn chưa điền địa chỉ giao hàng");
+				}
+				else {
+
+					$.ajax({
+						type: 'POST',
+						url: 'save',
+						data: $('form').serialize(),
+						dataType: 'json',
+						success: function (data) {
+							MessengerExtensions.requestCloseBrowser();
+						}
+					});
+				}
+			}
+		</script>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

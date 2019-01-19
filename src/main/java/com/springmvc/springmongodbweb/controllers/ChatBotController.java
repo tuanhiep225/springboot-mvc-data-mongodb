@@ -121,7 +121,7 @@ public class ChatBotController {
 		model.addAttribute("fb_iframe_origin", fb_iframe_origin);
 		model.addAttribute("gioitinh", gioitinh);
 		model.addAttribute("mess_name", mess_name);
-		return "create";
+		return "input";
 	}
 
 	@PostMapping("/save")
@@ -188,5 +188,10 @@ public class ChatBotController {
 	@ResponseBody
 	public PhoneMail checkUid(@RequestParam String uid) {
 		return phonemail.getByUid(uid);
+	}
+	
+	@GetMapping("/demo")
+	public String demo() {
+		return "input";
 	}
 }
