@@ -143,7 +143,7 @@ public class ChatBotController {
 			if(phone != null && !phone.isEmpty()) {
 				PhoneMail phoneuid = phonemail.getByPhone(phone);
 				String fullName = FacebookUtils.getNameByUid(phoneuid.getUid());
-				if(mess_name!=null && mess_name.equals(fullName)) {
+				if(mess_name!=null && fullName!= ""&& fullName.contains(mess_name)) {
 					res.setValid(true);
 				}
 				else
