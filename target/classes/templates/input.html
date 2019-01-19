@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Input Component</title>
+<title>Thông tin nhận quà tặng</title>
 <link
 	href="https://fonts.googleapis.com/css?family=Open+Sans:200,300,400,400i,500,600,700"
 	rel="stylesheet">
@@ -32,9 +32,6 @@
 <body style="background-color: #fafafa;">
 	<div class="main-container">
 		<div class="page input js_show">
-			<div class="page__hd">
-				<h1 class="page__title">Thông tin nhận quà tặng</h1>
-			</div>
 			<div class="page__bd">
 				<form name="frm" method="post">
 				<input type="hidden" name="messenger_user_id" th:value="${messenger_user_id}">
@@ -102,7 +99,7 @@
                         </div>
                     </div>
 				</div>
-				<div class="webvUI-bottombtn">
+				<div class="webvUI-btn-area">
 					<a href="javascript:;" class="webvUI-btn webvUI-btn_primary"
 						onclick="closeWebview()">Proceed to Checkout</a>
 				</div>
@@ -193,7 +190,10 @@
 						data: $('form').serialize(),
 						dataType: 'json',
 						success: function (data) {
-							MessengerExtensions.requestCloseBrowser();
+					        MessengerExtensions.requestCloseBrowser(function success() {
+					        }, function error(err) {
+					            alert(err);
+					        });
 						}
 					});
 				}
