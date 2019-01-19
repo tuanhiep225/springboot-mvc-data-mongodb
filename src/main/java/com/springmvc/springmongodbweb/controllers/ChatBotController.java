@@ -34,6 +34,7 @@ import com.springmvc.springmongodbweb.repositories.WardRepository;
 import com.springmvc.springmongodbweb.service.InformationRequestModelService;
 import com.springmvc.springmongodbweb.utils.BroadCastChatbot;
 import com.springmvc.springmongodbweb.utils.ConvertPhone;
+import com.springmvc.springmongodbweb.utils.FacebookUtils;
 
 /**
  * @author tuanhiep225
@@ -110,7 +111,7 @@ public class ChatBotController {
 	@RequestMapping("/create")
 	public String create(@RequestParam String title, @RequestParam String messenger_user_id,
 			@RequestParam String bot_id, @RequestParam String bot_token, @RequestParam String bot_link,
-			@RequestParam String goToBlock, @RequestParam String fb_iframe_origin,@RequestParam String gioitinh, Model model) {
+			@RequestParam String goToBlock, @RequestParam String fb_iframe_origin,@RequestParam String gioitinh,@RequestParam String mess_name, Model model) {
 		model.addAttribute("title", title);
 		model.addAttribute("messenger_user_id", messenger_user_id);
 		model.addAttribute("bot_id", bot_id);
@@ -119,6 +120,7 @@ public class ChatBotController {
 		model.addAttribute("goToBlock", goToBlock);
 		model.addAttribute("fb_iframe_origin", fb_iframe_origin);
 		model.addAttribute("gioitinh", gioitinh);
+		model.addAttribute("mess_name", mess_name);
 		return "create";
 	}
 
@@ -127,20 +129,30 @@ public class ChatBotController {
 	public User save(@RequestParam String hoten, @RequestParam String dienthoai, @RequestParam String tinh_tp,
 			@RequestParam String quan_huyen, @RequestParam String phuong_xa, @RequestParam String diachi,
 			@RequestParam String messenger_user_id, @RequestParam String bot_id, @RequestParam String bot_token,
-			@RequestParam String bot_link, @RequestParam String goToBlock, @RequestParam String fb_iframe_origin, @RequestParam String gioitinh) throws Exception {
-
+			@RequestParam String bot_link, @RequestParam String goToBlock, @RequestParam String fb_iframe_origin, @RequestParam String gioitinh, @RequestParam(name="mess_name",required=false) String mess_name) throws Exception {
+		
 		User user = User.builder().hoten(hoten).sodienthoai(dienthoai).tinh_tp(provinceRepo.getByProvinceid(tinh_tp)).quan_huyen(districtRepository.getByDistrictid(quan_huyen))
 				.phuong_xa(wardRepository.getByWardid(phuong_xa)).diachi(diachi).messenger_user_id(messenger_user_id).bot_id(bot_id)
 				.bot_token(bot_token).bot_link(bot_link).goToBlock(goToBlock).fb_iframe_origin(fb_iframe_origin)
 				.gioitinh(gioitinh)
 				.build();
-		String phone = ConvertPhone.convert(dienthoai);
-		if(phone != null && !phone.isEmpty()) {
-			
+
+		try {
+			User res = userRepo.add(user);
+			String phone = ConvertPhone.convert(dienthoai);
+			if(phone != null && !phone.isEmpty()) {
+				PhoneMail phoneuid = phonemail.getByPhone(phone);
+				String fullName = FacebookUtils.getNameByUid(phoneuid.getUid());
+				if(mess_name!=null && mess_name.equals(fullName)) {
+					res.setValid(true);
+				}
+				else
+					res.setValid(false);
+			}
+			BroadCastChatbot.sendToBlock(user.getGoToBlock(), res);
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
-		User res = userRepo.add(user);
-		
-		BroadCastChatbot.sendToBlock(user.getGoToBlock(), res);
 		return user;
 	}
 

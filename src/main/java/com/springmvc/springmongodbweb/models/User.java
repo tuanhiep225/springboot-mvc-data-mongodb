@@ -54,6 +54,10 @@ public class User extends BaseEntity<String> {
 	private Boolean valid;
 	
 	private String gioitinh;
+	
+	private String mess_name;
+	
+	private String fb_name;
 
 	@Override
 	public String getId() {

@@ -43,6 +43,8 @@ public class ConvertPhone {
 			String dausocu = phones.get(dausomoi);
 			if(dausocu != null)
 				return dausocu+number_original;
+			else
+				return "84"+phone.substring(1);
 		}
 		return "";
 		

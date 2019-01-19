@@ -1,29 +1,45 @@
 <!DOCTYPE html>
-<html lang="en"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-    <head>
-        <meta charset="UTF-8"/>
-        <title>Default title for my pages</title>
-        <link rel="stylesheet" href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
-        <link rel="stylesheet" href="/webjars/bootstrap/3.3.7/css/bootstrap-theme.min.css"/>
-        <style>
-        body {
-  padding-top: 50px;
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8" />
+<title>Default title for my pages</title>
+<link rel="stylesheet"
+	href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+<link rel="stylesheet"
+	href="/webjars/bootstrap/3.3.7/css/bootstrap-theme.min.css" />
+<style>
+body {
+	padding-top: 50px;
 }
+
 .starter-template {
-  padding: 40px 15px;
-  text-align: center;
+	padding: 40px 15px;
+	text-align: center;
 }
-        </style>
-        <script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
-    </head>
-    <body>
+</style>
+<script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
+</head>
+<body>
 
-        <div class="container col-xs-12 col-md-12 col-12">
-            <div class="starter-template" layout:fragment="content"></div>
-        </div><!-- /.container -->
+	<div class="container col-xs-12 col-md-12 col-12">
+		<div class="starter-template" layout:fragment="content"></div>
+	</div>
+	<!-- /.container -->
 
-        <script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    </body>
+	<script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<!-- messenger extensions sdk -->
+	<script type="text/javascript">
+		(function(d, s, id) {
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) {
+				return;
+			}
+			js = d.createElement(s);
+			js.id = id;
+			js.src = "//connect.facebook.com/en_US/messenger.Extensions.js";
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'Messenger'));
+	</script>
+</body>
 </html>
