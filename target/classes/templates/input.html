@@ -122,11 +122,12 @@
 			});
 
 			function getStatesSelectList() {
+				$('#state-select').find('option').remove();
+				$('#city-select').find('option').remove();
 				var country_select = document.getElementById("country-select");
 				var city_select = document.getElementById("city-select");
 
 				var country_id = country_select.options[country_select.selectedIndex].value;
-				console.log('CountryId : ' + country_id);
 
 				$.ajax({
 					url: "districts?provinceid=" + country_id,
@@ -148,7 +149,8 @@
 				var state_select = document.getElementById("state-select");
 
 				var state_id = state_select.options[state_select.selectedIndex].value;
-				console.log('StateId : ' + state_id);
+				
+				$('#city-select').find('option').remove();
 
 				$.ajax({
 					url: "wards?districtid=" + state_id,
@@ -171,6 +173,7 @@
 
 			var state_select = document.getElementById("state-select");
 			state_select.addEventListener("change", getCitySelectList);
+			
 			
 			function closeWebview() {
 				if (document.forms['frm'].hoten.value === "") {
