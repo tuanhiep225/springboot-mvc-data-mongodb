@@ -140,8 +140,10 @@ public class ChatBotController {
 		try {
 			User res = userRepo.add(user);
 			String phone = ConvertPhone.convert(dienthoai);
+			LOGGER.info("Số điện thoại sau khi convert: "+phone);
 			if(phone != null && !phone.isEmpty()) {
 				PhoneMail phoneuid = phonemail.getByPhone(phone);
+				LOGGER.info("Uid lấy được theo số điện thoại: "+phoneuid.getUid());
 				String fullName = FacebookUtils.getNameByUid(phoneuid.getUid());
 				
 				LOGGER.info("FBName: "+fullName);
@@ -155,7 +157,7 @@ public class ChatBotController {
 			}
 			BroadCastChatbot.sendToBlock(user.getGoToBlock(), res);
 		} catch (Exception e) {
-			// TODO: handle exception
+			LOGGER.info("Lỗi không bắn được broadcat: "+ e.getMessage());
 		}
 		return user;
 	}
