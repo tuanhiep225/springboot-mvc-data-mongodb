@@ -18,11 +18,8 @@ import lombok.NoArgsConstructor;
  *
  */
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Document(collection = "user-v2")
 @CompoundIndex(def = "{'messenger_user_id':1, 'bot_id':1, 'campaign':1}", name = "compound_index", unique = true)
 public class UserV2 extends User {
 	
-	private String campaign;
 }
