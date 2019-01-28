@@ -31,6 +31,7 @@ public class InformationRequestModel extends BaseEntity<String>{
 	private String messid;
 	private String ref;
 	private String linkgioithieu;
+	private String campaign;
 	@Override
 	public String getId() {
 		return this.id;

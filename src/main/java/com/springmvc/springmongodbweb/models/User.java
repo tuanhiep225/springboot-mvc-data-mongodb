@@ -58,6 +58,8 @@ public class User extends BaseEntity<String> {
 	private String mess_name;
 	
 	private String fb_name;
+	
+	private String campaign;
 
 	@Override
 	public String getId() {

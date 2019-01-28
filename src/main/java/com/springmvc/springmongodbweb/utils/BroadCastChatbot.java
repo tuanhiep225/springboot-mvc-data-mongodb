@@ -42,4 +42,14 @@ public class BroadCastChatbot {
 		WebTarget target = client.target(url);
 		Response response = target.request().post(Entity.json("{}"));
 	}
+	
+	public static void sendToBlockV2(String blockName, User model) throws Exception {
+		client = ClientHelperUtils.createClient();
+		String phuong = model != null ? model.getPhuong_xa().getName(): "";
+		String huyen = model != null ? model.getQuan_huyen().getName(): "";
+		String tinh = model != null ? model.getTinh_tp().getName(): "";
+		String url = "https://api.chatfuel.com/bots/"+model.getBot_id()+"/users/"+model.getMessenger_user_id()+"/send?chatfuel_token="+model.getBot_token()+"&chatfuel_block_name="+blockName+"&hoten="+URLEncoder.encode(model.getHoten())+"&dienthoai="+model.getSodienthoai()+"&diachi="+URLEncoder.encode(model.getDiachi())+"&phuong_xa="+URLEncoder.encode(phuong) +"&quan_huyen="+URLEncoder.encode(huyen)+"&tinh_tp="+URLEncoder.encode(tinh)+"&dadienthongtin=true";
+		WebTarget target = client.target(url);
+		Response response = target.request().post(Entity.json("{}"));
+	}
 }
