@@ -129,10 +129,10 @@ public class ChatBotControllerV2 {
 		return "update";
 	}
 	
-	@PostMapping("/update")
+	@PostMapping("/save-update")
 	public UserV2 update(@RequestParam String id,@RequestParam String hoten, @RequestParam String dienthoai, @RequestParam String tinh_tp,
-			@RequestParam String quan_huyen, @RequestParam String phuong_xa, @RequestParam String diachi, Model model) {
-
+			@RequestParam String quan_huyen, @RequestParam String phuong_xa, @RequestParam String diachi, Model model) throws Exception {
+		LOGGER.info("update thông tin");
 		UserV2 user = userRepo.get(id);
 		user.setHoten(hoten);
 		user.setSodienthoai(dienthoai);
@@ -141,6 +141,7 @@ public class ChatBotControllerV2 {
 		user.setPhuong_xa(wardRepository.getByWardid(phuong_xa));
 		user.setDiachi(diachi);
 		userRepo.update(user);
+		BroadCastChatbot.sendToBlockV2(user.getGoToBlock(), user);
 		return user;
 	}
 
