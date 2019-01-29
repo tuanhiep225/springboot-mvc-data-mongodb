@@ -55,6 +55,7 @@ public class BroadCastChatbot {
 	}
 	
 	public static void sendToBlockV2(String blockName, UserV2 model) throws Exception {
+		
 		client = ClientHelperUtils.createClient();
 		String phuong = model != null ? model.getPhuong_xa().getName(): "";
 		String huyen = model != null ? model.getQuan_huyen().getName(): "";
@@ -62,5 +63,7 @@ public class BroadCastChatbot {
 		String url = "https://api.chatfuel.com/bots/"+model.getBot_id()+"/users/"+model.getMessenger_user_id()+"/send?chatfuel_token="+model.getBot_token()+"&chatfuel_block_name="+blockName+"&hoten="+URLEncoder.encode(model.getHoten())+"&dienthoai="+model.getSodienthoai()+"&diachi="+URLEncoder.encode(model.getDiachi())+"&phuong_xa="+URLEncoder.encode(phuong) +"&quan_huyen="+URLEncoder.encode(huyen)+"&tinh_tp="+URLEncoder.encode(tinh)+"&dadienthongtin=true";
 		WebTarget target = client.target(url);
 		Response response = target.request().post(Entity.json("{}"));
+		
+		LOGGER.info("sendToBlockV2: "+ model.toString());
 	}
 }

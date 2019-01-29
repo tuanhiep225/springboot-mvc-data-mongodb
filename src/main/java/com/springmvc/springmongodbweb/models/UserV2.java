@@ -60,4 +60,16 @@ public class UserV2 extends BaseEntity<String> {
 	private String fb_name;
 	
 	private String campaign;
+
+	@Override
+	public String toString() {
+		return "UserV2 [id=" + id + ", hoten=" + hoten + ", sodienthoai=" + sodienthoai + ", tinh_tp=" + tinh_tp
+				+ ", quan_huyen=" + quan_huyen + ", phuong_xa=" + phuong_xa + ", diachi=" + diachi
+				+ ", messenger_user_id=" + messenger_user_id + ", bot_id=" + bot_id + ", bot_token=" + bot_token
+				+ ", bot_link=" + bot_link + ", goToBlock=" + goToBlock + ", fb_iframe_origin=" + fb_iframe_origin
+				+ ", valid=" + valid + ", gioitinh=" + gioitinh + ", mess_name=" + mess_name + ", fb_name=" + fb_name
+				+ ", campaign=" + campaign + "]";
+	}
+	
+	
 }
