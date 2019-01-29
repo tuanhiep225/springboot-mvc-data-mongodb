@@ -85,7 +85,7 @@ public class ChatBotControllerV2 {
 	@ResponseBody
 	public ResponseChatfuel postObject(InformationRequestModel data) throws Exception {
 
-		String linkgioithieu = "https://" + data.getBot_link() + "?ref=viral" + data.getMessid();
+		String linkgioithieu = "https://" + data.getBot_link() + "?ref=" + data.getCampaign().toLowerCase() + data.getMessid();
 		Map attributes = new HashMap<String, String>();
 		data.setLinkgioithieu(linkgioithieu);
 		attributes.put("linkgioithieu", linkgioithieu);
