@@ -91,7 +91,12 @@ public class ChatBotControllerV2 {
 		LOGGER.info(data.toString());
 		LOGGER.info(linkgioithieu);
 
-		service.add(data);
+		try {
+			service.add(data);
+		} catch (Exception e) {
+			
+		}
+		
 
 		String urlLink = "https://" + data.getBot_link() + "?ref=" + data.getRef();
 		InformationRequestModelV2 userGioithieu = service.getInformationRequestModelByLinkgioithieu(urlLink);
