@@ -137,10 +137,12 @@ public class ChatBotControllerV2 {
 
 		try {
 			UserV2 res = userRepo.add(user);
+			BroadCastChatbot.sendToBlockV2(user.getGoToBlock(), user);
 		} catch (Exception e) {
 			LOGGER.info("Lỗi khi thêm user: "+ e.getMessage());
+			BroadCastChatbot.sendToBlockNoAtribute("DaNhanQua", user);
 		}
-		BroadCastChatbot.sendToBlockV2(user.getGoToBlock(), user);
+		
 		return user;
 	}
 
