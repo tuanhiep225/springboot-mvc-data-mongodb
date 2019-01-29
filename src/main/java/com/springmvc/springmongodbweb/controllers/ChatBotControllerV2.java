@@ -123,14 +123,14 @@ public class ChatBotControllerV2 {
 	
 	@GetMapping("/update")
 	public String update(@RequestParam String messenger_user_id,
-			@RequestParam String bot_id,@RequestParam String campaign, Model model) {;
+			@RequestParam String bot_id,@RequestParam String campaign, Model model) {
 		UserV2 user = userRepo.getByMessenger_user_idAndCampaignAndBot_id(messenger_user_id, campaign, bot_id);
 		model.addAttribute("user", user);
 		return "update";
 	}
 	
 	@PostMapping("/update")
-	public String update(@RequestParam String id,@RequestParam String hoten, @RequestParam String dienthoai, @RequestParam String tinh_tp,
+	public UserV2 update(@RequestParam String id,@RequestParam String hoten, @RequestParam String dienthoai, @RequestParam String tinh_tp,
 			@RequestParam String quan_huyen, @RequestParam String phuong_xa, @RequestParam String diachi, Model model) {
 
 		UserV2 user = userRepo.get(id);
@@ -141,7 +141,7 @@ public class ChatBotControllerV2 {
 		user.setPhuong_xa(wardRepository.getByWardid(phuong_xa));
 		user.setDiachi(diachi);
 		userRepo.update(user);
-		return "update";
+		return user;
 	}
 
 	@PostMapping("/save")

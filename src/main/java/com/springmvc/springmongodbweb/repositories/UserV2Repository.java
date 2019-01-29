@@ -12,7 +12,7 @@ import com.springmvc.springmongodbweb.models.UserV2;
  *
  */
 public interface UserV2Repository  extends BaseRepository<UserV2, String>{
-	@Query("{'messenger_user_id':'?0', 'campaign':'?1', 'bot_id':'?2'}")
+	@Query("{'messenger_user_id':?0, 'campaign':?1, 'bot_id':?2}")
 	UserV2 getByMessenger_user_idAndCampaignAndBot_id(String messenger_user_id,String campaign, String bot_id);
 
 }
