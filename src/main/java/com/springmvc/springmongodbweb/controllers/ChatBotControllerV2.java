@@ -130,6 +130,7 @@ public class ChatBotControllerV2 {
 	}
 	
 	@PostMapping("/save-update")
+	@ResponseBody
 	public UserV2 update(@RequestParam String id,@RequestParam String hoten, @RequestParam String dienthoai, @RequestParam String tinh_tp,
 			@RequestParam String quan_huyen, @RequestParam String phuong_xa, @RequestParam String diachi, Model model) throws Exception {
 		LOGGER.info("update thông tin");
