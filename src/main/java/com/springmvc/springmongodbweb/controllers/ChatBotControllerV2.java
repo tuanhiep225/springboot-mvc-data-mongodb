@@ -21,9 +21,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.springmvc.springmongodbweb.models.District;
 import com.springmvc.springmongodbweb.models.InformationRequestModel;
+import com.springmvc.springmongodbweb.models.InformationRequestModelV2;
 import com.springmvc.springmongodbweb.models.Province;
 import com.springmvc.springmongodbweb.models.ResponseChatfuel;
-import com.springmvc.springmongodbweb.models.User;
 import com.springmvc.springmongodbweb.models.UserV2;
 import com.springmvc.springmongodbweb.models.Ward;
 import com.springmvc.springmongodbweb.mysql.models.PhoneMail;
@@ -32,10 +32,8 @@ import com.springmvc.springmongodbweb.repositories.DistrictRepository;
 import com.springmvc.springmongodbweb.repositories.ProvinceRepository;
 import com.springmvc.springmongodbweb.repositories.UserV2Repository;
 import com.springmvc.springmongodbweb.repositories.WardRepository;
-import com.springmvc.springmongodbweb.service.InformationRequestModelService;
+import com.springmvc.springmongodbweb.service.InformationRequestModelV2Service;
 import com.springmvc.springmongodbweb.utils.BroadCastChatbot;
-import com.springmvc.springmongodbweb.utils.ConvertPhone;
-import com.springmvc.springmongodbweb.utils.FacebookUtils;
 
 /**
  * @author tuanhiep225
@@ -45,7 +43,7 @@ import com.springmvc.springmongodbweb.utils.FacebookUtils;
 @RequestMapping("/api/v2/chatbot")
 public class ChatBotControllerV2 {
 	@Autowired
-	private InformationRequestModelService service;
+	private InformationRequestModelV2Service service;
 
 	@Autowired
 	private ProvinceRepository provinceRepo;
@@ -83,7 +81,7 @@ public class ChatBotControllerV2 {
 
 	@RequestMapping(value = "/request-invite", method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseChatfuel postObject(InformationRequestModel data) throws Exception {
+	public ResponseChatfuel postObject(InformationRequestModelV2 data) throws Exception {
 
 		String linkgioithieu = "https://" + data.getBot_link() + "?ref=" + data.getCampaign().toLowerCase() + data.getMessid();
 		Map attributes = new HashMap<String, String>();
@@ -96,10 +94,10 @@ public class ChatBotControllerV2 {
 		service.add(data);
 
 		String urlLink = "https://" + data.getBot_link() + "?ref=" + data.getRef();
-		InformationRequestModel userGioithieu = service.getInformationRequestModelByLinkgioithieu(urlLink);
+		InformationRequestModelV2 userGioithieu = service.getInformationRequestModelByLinkgioithieu(urlLink);
 
 		if (userGioithieu != null && urlLink.equals(userGioithieu.getLinkgioithieu())) {
-			BroadCastChatbot.sendToBlock("CongDiem", userGioithieu, data.getHoten());
+			BroadCastChatbot.sendToBlockV2("CongDiem", userGioithieu, data.getHoten());
 		}
 		return ResponseChatfuel.builder().set_attributes(attributes).build();
 	}
@@ -142,7 +140,7 @@ public class ChatBotControllerV2 {
 		user.setPhuong_xa(wardRepository.getByWardid(phuong_xa));
 		user.setDiachi(diachi);
 		userRepo.update(user);
-		BroadCastChatbot.sendToBlockV2(user.getGoToBlock(), user);
+		BroadCastChatbot.sendToBlockV2("SuaThongTin", user);
 		return user;
 	}
 
