@@ -120,6 +120,29 @@ public class ChatBotControllerV2 {
 		model.addAttribute("campaign", campaign);
 		return "inputv2";
 	}
+	
+	@GetMapping("/update")
+	public String update(@RequestParam String messenger_user_id,
+			@RequestParam String bot_id,@RequestParam String campaign, Model model) {;
+		UserV2 user = userRepo.getByMessenger_user_idAndCampaignAndBot_id(messenger_user_id, campaign, bot_id);
+		model.addAttribute("user", user);
+		return "update";
+	}
+	
+	@PostMapping("/update")
+	public String update(@RequestParam String id,@RequestParam String hoten, @RequestParam String dienthoai, @RequestParam String tinh_tp,
+			@RequestParam String quan_huyen, @RequestParam String phuong_xa, @RequestParam String diachi, Model model) {
+
+		UserV2 user = userRepo.get(id);
+		user.setHoten(hoten);
+		user.setSodienthoai(dienthoai);
+		user.setTinh_tp(provinceRepo.getByProvinceid(tinh_tp));
+		user.setQuan_huyen(districtRepository.getByDistrictid(quan_huyen));
+		user.setPhuong_xa(wardRepository.getByWardid(phuong_xa));
+		user.setDiachi(diachi);
+		userRepo.update(user);
+		return "update";
+	}
 
 	@PostMapping("/save")
 	@ResponseBody
