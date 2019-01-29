@@ -15,6 +15,7 @@ import org.apache.commons.logging.LogFactory;
 
 import com.springmvc.springmongodbweb.models.InformationRequestModel;
 import com.springmvc.springmongodbweb.models.User;
+import com.springmvc.springmongodbweb.models.UserV2;
 
 /**
  * @author tuanhiep225
@@ -43,7 +44,7 @@ public class BroadCastChatbot {
 		Response response = target.request().post(Entity.json("{}"));
 	}
 	
-	public static void sendToBlockV2(String blockName, User model) throws Exception {
+	public static void sendToBlockV2(String blockName, UserV2 model) throws Exception {
 		client = ClientHelperUtils.createClient();
 		String phuong = model != null ? model.getPhuong_xa().getName(): "";
 		String huyen = model != null ? model.getQuan_huyen().getName(): "";

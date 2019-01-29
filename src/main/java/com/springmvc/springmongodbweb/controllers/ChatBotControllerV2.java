@@ -123,13 +123,13 @@ public class ChatBotControllerV2 {
 
 	@PostMapping("/save")
 	@ResponseBody
-	public User save(@RequestParam String hoten, @RequestParam String dienthoai, @RequestParam String tinh_tp,
+	public UserV2 save(@RequestParam String hoten, @RequestParam String dienthoai, @RequestParam String tinh_tp,
 			@RequestParam String quan_huyen, @RequestParam String phuong_xa, @RequestParam String diachi,
 			@RequestParam String messenger_user_id, @RequestParam String bot_id, @RequestParam String bot_token,
 			@RequestParam String bot_link, @RequestParam String goToBlock, @RequestParam String fb_iframe_origin, @RequestParam String gioitinh,
 			@RequestParam(name="mess_name",required=false) String mess_name, @RequestParam String campaign) throws Exception {
 		
-		UserV2 user = (UserV2) User.builder().hoten(hoten).sodienthoai(dienthoai).tinh_tp(provinceRepo.getByProvinceid(tinh_tp)).quan_huyen(districtRepository.getByDistrictid(quan_huyen))
+		UserV2 user =  UserV2.builder().hoten(hoten).sodienthoai(dienthoai).tinh_tp(provinceRepo.getByProvinceid(tinh_tp)).quan_huyen(districtRepository.getByDistrictid(quan_huyen))
 				.phuong_xa(wardRepository.getByWardid(phuong_xa)).diachi(diachi).messenger_user_id(messenger_user_id).bot_id(bot_id)
 				.bot_token(bot_token).bot_link(bot_link).goToBlock(goToBlock).fb_iframe_origin(fb_iframe_origin)
 				.gioitinh(gioitinh).campaign(campaign)
